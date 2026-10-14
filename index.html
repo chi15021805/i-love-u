@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chị có iu em hong?</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #fff0f6, #ffd6e7);
+      font-family: Arial, sans-serif;
+      color: #c72c6b;
+      padding: 20px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 420px;
+      padding: 35px 20px;
+      text-align: center;
+      background: white;
+      border-radius: 25px;
+      box-shadow: 0 8px 30px #e88bb044;
+    }
+
+    h1 {
+      font-size: 28px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      min-height: 130px;
+      position: relative;
+    }
+
+    button {
+      border: none;
+      border-radius: 14px;
+      padding: 13px 25px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s, top 0.2s, left 0.2s;
+    }
+
+    #yes {
+      background: #f05291;
+      color: white;
+    }
+
+    #no {
+      background: #ffe5ef;
+      color: #c72c6b;
+    }
+
+    #result {
+      display: none;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    #result img {
+      display: block;
+      width: 100%;
+      border-radius: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="card" id="card">
+    <h1>Chị có iu em hong?</h1>
+    <p>Chọn thật lòng nha</p>
+
+    <div class="buttons" id="buttons">
+      <button id="yes">Có</button>
+      <button id="no">No</button>
+    </div>
+
+    <div id="result">
+      <img src="heart.jpg" alt="Trái tim làm từ lá">
+    </div>
+  </main>
+
+  <script>
+    const yes = document.getElementById("yes");
+    const no = document.getElementById("no");
+    const buttons = document.getElementById("buttons");
+    const result = document.getElementById("result");
+    const card = document.getElementById("card");
+
+    let size = 1;
+
+    no.addEventListener("click", () => {
+      size = Math.min(size + 0.12, 2);
+
+      yes.style.transform = `scale(${size})`;
+
+      // Làm nút No nhảy đến vị trí ngẫu nhiên
+      no.style.position = "absolute";
+
+      const maxX = buttons.clientWidth - no.offsetWidth;
+      const maxY = buttons.clientHeight - no.offsetHeight;
+
+      no.style.left = Math.max(0, Math.random() * maxX) + "px";
+      no.style.top = Math.max(0, Math.random() * maxY) + "px";
+    });
+
+    yes.addEventListener("click", () => {
+      buttons.remove();
+      card.querySelector("h1").remove();
+      card.querySelector("p").remove();
+
+      result.style.display = "block";
+    });
+  </script>
+</body>
+</html>
